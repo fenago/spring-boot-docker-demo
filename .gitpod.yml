@@ -1,0 +1,47 @@
+tasks:
+  - name: Setup Java 17 and Docker
+    init: |
+      # Install Java 17 via SDKMAN
+      sdk install java 17.0.15-tem
+      sdk default java 17.0.15-tem
+      
+      # Update JAVA_HOME and PATH for this session
+      export JAVA_HOME=$HOME/.sdkman/candidates/java/17.0.15-tem
+      export PATH=$JAVA_HOME/bin:$PATH
+      
+      # Verify setup
+      echo "Java version:"
+      java -version
+      echo "Maven version:"
+      mvn -version
+      echo "Docker version:"
+      docker --version
+      
+      # Build the project
+      mvn clean package
+    command: |
+      # Ensure Java 17 is active
+      sdk default java 17.0.15-tem
+      export JAVA_HOME=$HOME/.sdkman/candidates/java/17.0.15-tem
+      export PATH=$JAVA_HOME/bin:$PATH
+      
+      # Start the application
+      echo "🚀 Starting Spring Boot application..."
+      mvn spring-boot:run
+ports:
+  - port: 8080
+    onOpen: open-preview
+    description: Spring Boot Application
+  - port: 5005
+    onOpen: ignore
+    description: Debug Port
+vscode:
+  extensions:
+    - vscjava.vscode-spring-boot
+    - vscjava.vscode-maven
+    - redhat.java
+    - ms-azuretools.vscode-docker
+    - Pivotal.vscode-spring-boot
+# Docker support and Java 17
+image:
+  file: .gitpod.Dockerfile
