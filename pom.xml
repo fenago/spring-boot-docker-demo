@@ -8,10 +8,10 @@
 		<version>3.5.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.microservice.demo</groupId>
-	<artifactId>spring-boot-docker-demo</artifactId>
+	<groupId>com.microservice.demo1</groupId>
+	<artifactId>spring-boot-docker-demo1</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-boot-docker-demo</name>
+	<name>spring-boot-docker-demo1</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
