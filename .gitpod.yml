@@ -1,29 +1,25 @@
 tasks:
-  - name: JVM setup and run Spring Boot
+  - name: Setup Java 17 and Optimize JVM
     init: |
       echo "Y" | sdk install java 17.0.15-tem
       sdk default java 17.0.15-tem
+      java -version
+      mvn -version
       mvn clean install
     command: |
-      mvn spring-boot:run \
-      -Dspring-boot.run.profiles=dev \
-      -Dcom.sun.management.jmxremote=true \
-      -Dcom.sun.management.jmxremote.port=9010 \
-      -Dcom.sun.management.jmxremote.rmi.port=9010 \
-      -Dcom.sun.management.jmxremote.local.only=false \
-      -Dcom.sun.management.jmxremote.authenticate=false \
-      -Dcom.sun.management.jmxremote.ssl=false \
-      -XX:+UseG1GC -Xms512m -Xmx1024m
-
+      export MAVEN_OPTS="-XX:+UseG1GC -Xms512m -Xmx1024m -Dcom.sun.management.jmxremote=true"
+      mvn spring-boot:run -Dspring-boot.run.profiles=dev
 ports:
   - port: 8080
     onOpen: open-preview
   - port: 9010
     visibility: public
-
 vscode:
   extensions:
-    - visualvm.visualvm-launcher
-    - redhat.java
-    - vscjava.vscode-maven
     - vscjava.vscode-spring-boot
+    - vscjava.vscode-maven
+    - redhat.java
+    - Pivotal.vscode-spring-boot
+    - eamodio.gitlens
+    - humao.rest-client
+    - visualvm.visualvm-launcher
