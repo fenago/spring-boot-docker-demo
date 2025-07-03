@@ -25,3 +25,4 @@ vscode:
     - Pivotal.vscode-spring-boot
     - eamodio.gitlens
     - humao.rest-client
+    - visualvm.visualvm-launcher
